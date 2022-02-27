@@ -100,9 +100,20 @@ function getName() {
 
 const copyToClipboard = (str) => {
     const canWeCopyToClipboard = navigator && navigator.clipboard && navigator.clipboard.writeText;
-    const text = str.target.textContent.split(':');
+    const ourSeparator = str.target.copySeparator
+    const text = ourSeparator? str.target.textContent.split(ourSeparator) : str.target.textContent;
     if (canWeCopyToClipboard) {
-        return navigator.clipboard.writeText(text[1].trim());
+        let textToCopy;
+        const isTextArray = Array.isArray(text);
+
+        if (isTextArray && ourSeparator)  {
+            text.shift();
+            textToCopy = text.join(ourSeparator).trim()
+        } else {
+            textToCopy = text.trim()
+        }
+
+        return navigator.clipboard.writeText(textToCopy);
     }
     return Promise.reject('The Clipboard API is not available.');
 };
@@ -118,6 +129,7 @@ window.onload = async () => {
             const nestedElem = document.createElement('div');
             nestedElem.addEventListener('click', copyToClipboard);
             nestedElem.setAttribute('title', 'Click to copy to Clipboard!');
+            nestedElem.copySeparator = ':'
             const text = document.createTextNode(`Your ${data}: ${apiResponse[data]}`);
             nestedElem.appendChild(text)
             document.getElementById('our-target').appendChild(nestedElem)
