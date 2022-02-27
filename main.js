@@ -9,8 +9,8 @@ async function getLocation(ip) {
 }
 
 async function myLocation() {
-    const ourIp = await window.getIp();
-    return await window.getLocation(ourIp.ip);
+    const ourIp = await getIp();
+    return await getLocation(ourIp.ip);
 }
 
 function getName() {
