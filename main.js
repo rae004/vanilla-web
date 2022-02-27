@@ -101,7 +101,7 @@ function getName() {
 const copyToClipboard = (str) => {
     const canWeCopyToClipboard = navigator && navigator.clipboard && navigator.clipboard.writeText;
     const ourSeparator = str.target.copySeparator
-    const text = ourSeparator? str.target.textContent.split(ourSeparator) : str.target.textContent;
+    const text = ourSeparator ? str.target.textContent.split(ourSeparator) : str.target.textContent;
     if (canWeCopyToClipboard) {
         let textToCopy;
         const isTextArray = Array.isArray(text);
