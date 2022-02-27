@@ -61,11 +61,11 @@ async function getCoinRate() {
 
 async function coinCallback(event) {
     const newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'social')
     const coinRate = await getCoinRate();
     const rate = coinRate.bpi.USD.rate;
     const disclaimerText = document.createTextNode(`${coinRate.disclaimer}`);
     const coinText = document.createTextNode(`$${rate.slice(0, rate.length -2)}`);
+    newDiv.setAttribute('class', 'social');
     newDiv.appendChild(disclaimerText);
     [0,1].forEach(() => newDiv.appendChild(document.createElement('br')));
     newDiv.appendChild(coinText);
@@ -77,7 +77,6 @@ async function coinButton() {
     button.setAttribute('class', 'social')
     button.addEventListener('click', coinCallback);
 }
-
 
 const copyToClipboard = (str) => {
     const canWeCopyToClipboard = navigator && navigator.clipboard && navigator.clipboard.writeText;
