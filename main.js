@@ -1,3 +1,5 @@
+const resetButtonDelay = 7000;
+
 async function getIp() {
     const response = await fetch('https://api.ipify.org?format=json');
     return await response.json();
@@ -19,12 +21,15 @@ async function getSocialActivity() {
 }
 
 async function socialCallback(event) {
+    const existingDiv = event.target;
     const newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'buttonStyles')
     const socialActivity = await getSocialActivity();
     const socialText = document.createTextNode(`You should ${socialActivity.activity.toLowerCase()}`);
+    newDiv.setAttribute('class', 'buttonStyles');
     newDiv.appendChild(socialText);
-    event.target.parentNode.replaceChild(newDiv, event.target);
+    existingDiv.parentNode.replaceChild(newDiv, existingDiv);
+
+    resetElementTimeout(existingDiv, newDiv);
 }
 
 async function createSocialButton() {
@@ -39,13 +44,15 @@ async function getCatFact() {
 }
 
 async function catCallback(event) {
+    const existingDiv = event.target;
     const newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'buttonStyles')
     const catFact = await getCatFact();
-    console.log('our cat: ',catFact);
     const catText = document.createTextNode(`Did you know ${catFact.fact.toLowerCase()}`);
+    newDiv.setAttribute('class', 'buttonStyles')
     newDiv.appendChild(catText);
-    event.target.parentNode.replaceChild(newDiv, event.target);
+    existingDiv.parentNode.replaceChild(newDiv, existingDiv);
+
+    resetElementTimeout(existingDiv, newDiv);
 }
 
 async function catButton() {
@@ -60,6 +67,7 @@ async function getCoinRate() {
 }
 
 async function coinCallback(event) {
+    const existingDiv = event.target;
     const newDiv = document.createElement('div');
     const coinRate = await getCoinRate();
     const rate = coinRate.bpi.USD.rate;
@@ -69,13 +77,25 @@ async function coinCallback(event) {
     newDiv.appendChild(disclaimerText);
     [0,1].forEach(() => newDiv.appendChild(document.createElement('br')));
     newDiv.appendChild(coinText);
-    event.target.parentNode.replaceChild(newDiv, event.target);
+    existingDiv.parentNode.replaceChild(newDiv, existingDiv);
+
+    resetElementTimeout(existingDiv, newDiv);
 }
 
 async function coinButton() {
     const button = document.getElementById('coin-button')
     button.setAttribute('class', 'buttonStyles')
     button.addEventListener('click', coinCallback);
+}
+
+function resetElementTimeout(replacementElm, targetElm) {
+    return setTimeout(() => {
+        targetElm.parentNode.replaceChild(replacementElm, targetElm)
+    }, resetButtonDelay)
+}
+
+function getName() {
+    return ' Greg,';
 }
 
 const copyToClipboard = (str) => {
@@ -86,10 +106,6 @@ const copyToClipboard = (str) => {
     }
     return Promise.reject('The Clipboard API is not available.');
 };
-
-function getName() {
-    return ' Greg,';
-}
 
 window.onload = async () => {
     const header = document.getElementById('name-header')
