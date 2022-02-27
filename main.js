@@ -54,6 +54,28 @@ async function catButton() {
     button.addEventListener('click', catCallback);
 }
 
+async function getCoinRate() {
+    const ourCrypto = await fetch('https://api.coindesk.com/v1/bpi/currentprice.json');
+    return await ourCrypto.json();
+}
+
+async function coinCallback(event) {
+    const newDiv = document.createElement('div');
+    newDiv.setAttribute('class', 'social')
+    const coinRate = await getCoinRate();
+    console.log('our cat: ',coinRate);
+    const catText = document.createTextNode(`Did you know ${catFact.fact.toLowerCase()}`);
+    newDiv.appendChild(catText);
+    event.target.parentNode.replaceChild(newDiv, event.target);
+}
+
+async function coinButton() {
+    const button = document.getElementById('cat-button')
+    button.setAttribute('class', 'social')
+    button.addEventListener('click', catCallback);
+}
+
+
 const copyToClipboard = (str) => {
     const canWeCopyToClipboard = navigator && navigator.clipboard && navigator.clipboard.writeText;
     const text = str.target.textContent.split(':');
