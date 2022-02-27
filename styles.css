@@ -11,7 +11,12 @@ body {
 .flex-column {
     display: flex;
     flex-direction: column;
+    padding: 1rem;
     border: 3px solid #803a00;
+}
+
+.flex-column > div {
+    padding: 0.5rem;
 }
 
 .center-header-text {
