@@ -16,7 +16,7 @@ async function myLocation() {
 }
 
 async function getSocialActivity() {
-    const ourSocialActivity = await fetch('https://www.boredapi.com/api/activity?type=social');
+    const ourSocialActivity = await fetch('https://www.boredapi.com/api/activity');
     return await ourSocialActivity.json();
 }
 
@@ -111,6 +111,7 @@ window.onload = async () => {
     const header = document.getElementById('name-header')
     const name = document.createTextNode(getName());
     header.appendChild(name);
+
     myLocation().then((apiResponse) => {
         console.log('our api data: ', apiResponse);
         for (const data in apiResponse) {
