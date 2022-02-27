@@ -63,16 +63,19 @@ async function coinCallback(event) {
     const newDiv = document.createElement('div');
     newDiv.setAttribute('class', 'social')
     const coinRate = await getCoinRate();
-    console.log('our cat: ',coinRate);
-    const catText = document.createTextNode(`Did you know ${catFact.fact.toLowerCase()}`);
-    newDiv.appendChild(catText);
+    const rate = coinRate.bpi.USD.rate;
+    const disclaimerText = document.createTextNode(`${coinRate.disclaimer}`);
+    const coinText = document.createTextNode(`$${rate.slice(0, rate.length -2)}`);
+    newDiv.appendChild(disclaimerText);
+    [0,1].forEach(() => newDiv.appendChild(document.createElement('br')));
+    newDiv.appendChild(coinText);
     event.target.parentNode.replaceChild(newDiv, event.target);
 }
 
 async function coinButton() {
-    const button = document.getElementById('cat-button')
+    const button = document.getElementById('coin-button')
     button.setAttribute('class', 'social')
-    button.addEventListener('click', catCallback);
+    button.addEventListener('click', coinCallback);
 }
 
 
@@ -107,4 +110,5 @@ window.onload = async () => {
 
     await createSocialButton();
     await catButton();
+    await coinButton();
 }
