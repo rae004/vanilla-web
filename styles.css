@@ -11,6 +11,9 @@ body {
 .flex-column {
     display: flex;
     flex-direction: column;
-    text-align: center;
     border: 3px solid #803a00;
+}
+
+.center-header-text {
+    text-align: center;
 }

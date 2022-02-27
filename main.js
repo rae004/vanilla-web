@@ -13,7 +13,14 @@ async function myLocation() {
     return await window.getLocation(ourIp.ip);
 }
 
+function getName() {
+    return ' Greg,';
+}
+
 window.onload = () => {
+    const header = document.getElementById('name-header')
+    const name = document.createTextNode(getName());
+    header.appendChild(name);
     myLocation().then((res) => {
         console.log('our api data: ', res);
         for (const data in res) {
