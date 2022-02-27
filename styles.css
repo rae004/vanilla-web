@@ -27,3 +27,11 @@ body {
 .center-header-text {
     text-align: center;
 }
+
+.social {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 3px solid #803a00;
+    margin-top: 1rem;
+}

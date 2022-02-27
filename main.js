@@ -13,6 +13,26 @@ async function myLocation() {
     return await getLocation(ourIp.ip);
 }
 
+async function getSocialActivity() {
+    const ourSocialActivity = await fetch('https://www.boredapi.com/api/activity?type=social');
+    return await ourSocialActivity.json();
+}
+
+async function socialCallback(event) {
+    const newDiv = document.createElement('div');
+    newDiv.setAttribute('class', 'social')
+    const socialActivity = await getSocialActivity();
+    const socialText = document.createTextNode(`You should ${socialActivity.activity.toLowerCase()}`);
+    newDiv.appendChild(socialText);
+    event.target.parentNode.replaceChild(newDiv, event.target);
+}
+
+async function createSocialButton() {
+    const button = document.getElementById('social-button')
+    button.setAttribute('class', 'social')
+    button.addEventListener('click', socialCallback);
+}
+
 const copyToClipboard = (str) => {
     const canWeCopyToClipboard = navigator && navigator.clipboard && navigator.clipboard.writeText;
     const text = str.target.textContent.split(':');
@@ -26,7 +46,7 @@ function getName() {
     return ' Greg,';
 }
 
-window.onload = () => {
+window.onload = async () => {
     const header = document.getElementById('name-header')
     const name = document.createTextNode(getName());
     header.appendChild(name);
@@ -41,4 +61,5 @@ window.onload = () => {
             document.getElementById('our-target').appendChild(nestedElem)
         }
     });
+    await createSocialButton()
 }
