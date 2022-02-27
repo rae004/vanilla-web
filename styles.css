@@ -21,6 +21,7 @@ body {
 
 .flex-column > div:hover {
     background-color: cornflowerblue;
+    color: #6b0000;
 }
 
 .center-header-text {
