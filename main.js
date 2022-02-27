@@ -16,13 +16,11 @@ async function myLocation() {
 window.onload = () => {
     myLocation().then((res) => {
         console.log('our api data: ', res);
-        const element = document.createElement('div');
         for (const data in res) {
             const nestedElem = document.createElement('div');
             const text = document.createTextNode(`Your ${data}: ${res[data]}`);
             nestedElem.appendChild(text)
-            element.appendChild(nestedElem)
+            document.getElementById('our-target').appendChild(nestedElem)
         }
-        document.getElementById('our-target').appendChild(element)
     });
 }
