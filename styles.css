@@ -1,4 +1,16 @@
+body {
+    background-color: aliceblue;
+}
+.container {
+    margin: auto;
+    width: 50%;
+    border: 3px solid #ec7907;
+    padding: 10px;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
+    text-align: center;
+    border: 3px solid #803a00;
 }
