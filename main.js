@@ -33,6 +33,27 @@ async function createSocialButton() {
     button.addEventListener('click', socialCallback);
 }
 
+async function getCatFact() {
+    const ourCatFact = await fetch('https://catfact.ninja/fact');
+    return await ourCatFact.json();
+}
+
+async function catCallback(event) {
+    const newDiv = document.createElement('div');
+    newDiv.setAttribute('class', 'social')
+    const catFact = await getCatFact();
+    console.log('our cat: ',catFact);
+    const catText = document.createTextNode(`Did you know ${catFact.fact.toLowerCase()}`);
+    newDiv.appendChild(catText);
+    event.target.parentNode.replaceChild(newDiv, event.target);
+}
+
+async function catButton() {
+    const button = document.getElementById('cat-button')
+    button.setAttribute('class', 'social')
+    button.addEventListener('click', catCallback);
+}
+
 const copyToClipboard = (str) => {
     const canWeCopyToClipboard = navigator && navigator.clipboard && navigator.clipboard.writeText;
     const text = str.target.textContent.split(':');
@@ -61,5 +82,7 @@ window.onload = async () => {
             document.getElementById('our-target').appendChild(nestedElem)
         }
     });
-    await createSocialButton()
+
+    await createSocialButton();
+    await catButton();
 }
