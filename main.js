@@ -20,7 +20,7 @@ async function getSocialActivity() {
 
 async function socialCallback(event) {
     const newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'social')
+    newDiv.setAttribute('class', 'buttonStyles')
     const socialActivity = await getSocialActivity();
     const socialText = document.createTextNode(`You should ${socialActivity.activity.toLowerCase()}`);
     newDiv.appendChild(socialText);
@@ -29,7 +29,7 @@ async function socialCallback(event) {
 
 async function createSocialButton() {
     const button = document.getElementById('social-button')
-    button.setAttribute('class', 'social')
+    button.setAttribute('class', 'buttonStyles')
     button.addEventListener('click', socialCallback);
 }
 
@@ -40,7 +40,7 @@ async function getCatFact() {
 
 async function catCallback(event) {
     const newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'social')
+    newDiv.setAttribute('class', 'buttonStyles')
     const catFact = await getCatFact();
     console.log('our cat: ',catFact);
     const catText = document.createTextNode(`Did you know ${catFact.fact.toLowerCase()}`);
@@ -50,7 +50,7 @@ async function catCallback(event) {
 
 async function catButton() {
     const button = document.getElementById('cat-button')
-    button.setAttribute('class', 'social')
+    button.setAttribute('class', 'buttonStyles')
     button.addEventListener('click', catCallback);
 }
 
@@ -65,7 +65,7 @@ async function coinCallback(event) {
     const rate = coinRate.bpi.USD.rate;
     const disclaimerText = document.createTextNode(`${coinRate.disclaimer}`);
     const coinText = document.createTextNode(`$${rate.slice(0, rate.length -2)}`);
-    newDiv.setAttribute('class', 'social');
+    newDiv.setAttribute('class', 'buttonStyles');
     newDiv.appendChild(disclaimerText);
     [0,1].forEach(() => newDiv.appendChild(document.createElement('br')));
     newDiv.appendChild(coinText);
@@ -74,7 +74,7 @@ async function coinCallback(event) {
 
 async function coinButton() {
     const button = document.getElementById('coin-button')
-    button.setAttribute('class', 'social')
+    button.setAttribute('class', 'buttonStyles')
     button.addEventListener('click', coinCallback);
 }
 

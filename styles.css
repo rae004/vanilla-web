@@ -28,7 +28,7 @@ body {
     text-align: center;
 }
 
-.social {
+.buttonStyles {
     display: flex;
     flex-direction: column;
     padding: 1rem;
