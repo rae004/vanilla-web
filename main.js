@@ -1,13 +1,11 @@
 async function getIp() {
     const response = await fetch('https://api.ipify.org?format=json');
-    const results = await response.json()
-    return results;
+    return await response.json();
 }
 
 async function getLocation(ip) {
     const response = await fetch(`https://ipinfo.io/${ip}/geo`);
-    const results = await response.json()
-    return results;
+    return await response.json();
 }
 
 async function myLocation() {
@@ -17,6 +15,7 @@ async function myLocation() {
 
 window.onload = () => {
     myLocation().then((res) => {
+        console.log('our api data: ', res);
         const element = document.createElement('div');
         for (const data in res) {
             const nestedElem = document.createElement('div');
