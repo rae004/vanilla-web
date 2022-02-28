@@ -2,22 +2,22 @@ const resetButtonDelay = 7000;
 
 async function getIp() {
     const response = await fetch('https://api.ipify.org?format=json');
-    return await response.json();
+    return response.json();
 }
 
 async function getLocation(ip) {
     const response = await fetch(`https://ipinfo.io/${ip}/geo`);
-    return await response.json();
+    return response.json();
 }
 
 async function myLocation() {
     const ourIp = await getIp();
-    return await getLocation(ourIp.ip);
+    return getLocation(ourIp.ip);
 }
 
 async function getSocialActivity() {
     const ourSocialActivity = await fetch('https://www.boredapi.com/api/activity');
-    return await ourSocialActivity.json();
+    return ourSocialActivity.json();
 }
 
 async function socialCallback(event) {
@@ -32,7 +32,7 @@ async function socialCallback(event) {
     resetElementTimeout(existingDiv, newDiv);
 }
 
-async function createSocialButton() {
+function createSocialButton() {
     const button = document.getElementById('social-button')
     button.setAttribute('class', 'buttonStyles')
     button.addEventListener('click', socialCallback);
@@ -40,7 +40,7 @@ async function createSocialButton() {
 
 async function getCatFact() {
     const ourCatFact = await fetch('https://catfact.ninja/fact');
-    return await ourCatFact.json();
+    return ourCatFact.json();
 }
 
 async function catCallback(event) {
@@ -55,7 +55,7 @@ async function catCallback(event) {
     resetElementTimeout(existingDiv, newDiv);
 }
 
-async function catButton() {
+function catButton() {
     const button = document.getElementById('cat-button')
     button.setAttribute('class', 'buttonStyles')
     button.addEventListener('click', catCallback);
@@ -63,7 +63,7 @@ async function catButton() {
 
 async function getCoinRate() {
     const ourCrypto = await fetch('https://api.coindesk.com/v1/bpi/currentprice.json');
-    return await ourCrypto.json();
+    return ourCrypto.json();
 }
 
 async function coinCallback(event) {
@@ -82,7 +82,7 @@ async function coinCallback(event) {
     resetElementTimeout(existingDiv, newDiv);
 }
 
-async function coinButton() {
+function coinButton() {
     const button = document.getElementById('coin-button')
     button.setAttribute('class', 'buttonStyles')
     button.addEventListener('click', coinCallback);
@@ -136,7 +136,7 @@ window.onload = async () => {
         }
     });
 
-    await createSocialButton();
-    await catButton();
-    await coinButton();
+    createSocialButton();
+    catButton();
+    coinButton();
 }
